@@ -1,4 +1,4 @@
-# EDIT
+# update version
 
 VERSION="1"
 
@@ -6,13 +6,13 @@ SCRIPT_URL='https://github.com/anuja-mohalkar/AudIT/blob/main/audit1.sh'
 
 
 
-# DO NOT EDIT
+# No need to update version
 
-SCRIPT_LOCATION="${BASH_SOURCE[@]}"
+SCRIPT_LOCATION="${BASH_SOURCE}"
 
 ABS_SCRIPT_PATH=$(readlink -f "$SCRIPT_LOCATION")
 
-TMP_FILE=$(mktemp -p "" "test.sh")
+TMP_FILE=$(mktemp -p "" "XXXXX.sh")
 
 
 
@@ -31,3 +31,6 @@ else
      printf "Already the latest version."
 
 fi
+
+echo curl -s -L "$SCRIPT_URL" > "$TMP_FILE"
+
