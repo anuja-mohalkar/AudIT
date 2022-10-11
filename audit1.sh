@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1.0.1"
+VERSION="2"
 temp_line_count=1
 echo "--------------------------------------------"
 
