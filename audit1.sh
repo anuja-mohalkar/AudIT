@@ -30,7 +30,7 @@ echo  "$Cheksum_Of_Downloaded_File"
 # Compare to checksum value using if else loop
 if [ "$Cheksum_Of_Local_File"  !=  "$Cheksum_Of_Downloaded_File" ]; then
     printf "Updating latest version"
-   # cp -f "$TMP_FILE" "$ABS_SCRIPT_PATH" || printf "Unable to update the script"
+    cp -f "$TMP_FILE" "$ABS_SCRIPT_PATH" || printf "Unable to update the script"
 else
      printf "Already the latest version."
 fi
