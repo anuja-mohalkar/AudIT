@@ -169,5 +169,5 @@ do
 
     temp_line_count=$line_count
 
-  fi
+   fi
 done
