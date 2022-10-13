@@ -1,15 +1,35 @@
 #!/bin/bash
 
-VERSION="2"
+# remote repository location URL
 SCRIPT_URL='https://raw.githubusercontent.com/anuja-mohalkar/AudIT/main/audit1.sh'
+
+# Local file name which is installed on machine
 SCRIPT_LOCATION="${BASH_SOURCE[@]}"
+
+# Cheksum for local file using md5sum algorithm
+Cheksum_Of_Local_File=$(md5sum "$SCRIPT_LOCATION" | awk '{print $1}')
+
+# printing cheksum value of local file
+echo "$Cheksum_Of_Local_File"
+
+# Local script path from machine
 ABS_SCRIPT_PATH=$(readlink -f "$SCRIPT_LOCATION")
+
+# Creating empty temporary file
 TMP_FILE=$(mktemp -p "" "XXXXX.sh")
 
+# Copy data from remote repository to temporary file using curl command
 curl -s -L "$SCRIPT_URL" > "$TMP_FILE"
-NEW_VER=$(grep "^VERSION" "$TMP_FILE" | awk -F'[="]' '{print $3}')
-if [[ "$VERSION" < "$NEW_VER" ]]; then
-    printf "Updating script \e[31;1m%s\e[0m -> \e[32;1m%s\e[0m\n" "$VERSION" "$NEW_VER"
+
+# Cheksum for downloaded file using md5sum algorithm
+Cheksum_Of_Downloaded_File=$(md5sum "$TMP_FILE" | awk '{print $1}')
+
+# printing cheksum value of downloaded file
+echo  "$Cheksum_Of_Downloaded_File"
+
+# Compare to checksum value using if else loop
+if [ "$Cheksum_Of_Local_File"  !=  "$Cheksum_Of_Downloaded_File" ]; then
+    printf "Updating latest version"
     cp -f "$TMP_FILE" "$ABS_SCRIPT_PATH" || printf "Unable to update the script"
 else
      printf "Already the latest version."
@@ -45,7 +65,7 @@ do
   line_diff=$(expr $line_count - $temp_line_count)
   
 
-# If history file is changed, i.e. number of lines are changed  
+  # If history file is changed, i.e. number of lines are changed  
 
   if [ $temp_line_count -ne $line_count ] && [ "$install_word_found" == " install " ] && [ $line_diff -ge 5 ]
 
@@ -169,5 +189,6 @@ do
 
     temp_line_count=$line_count
 
-   fi
+  fi
+
 done
