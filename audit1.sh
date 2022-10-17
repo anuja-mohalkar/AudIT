@@ -67,7 +67,7 @@ do
 
   # If history file is changed, i.e. number of lines are changed  
 
-  if [ $temp_line_count -ne $line_count ] && [ "$install_word_found" == " install " ] && [ $line_diff -ge 5 ]
+  if [ $temp_line_count -ne $line_count ] && [ "$install_word_found" == " install " ] && [ $line_diff -ge 6 ]
 
   then
 
