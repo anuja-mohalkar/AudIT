@@ -10,7 +10,7 @@ SCRIPT_LOCATION="${BASH_SOURCE[@]}"
 Cheksum_Of_Local_File=$(md5sum "$SCRIPT_LOCATION" | awk '{print $1}')
 
 # printing cheksum value of local file
-echo "$Cheksum_Of_Local_File"
+# echo "$Cheksum_Of_Local_File"
 
 # Local script path from machine
 ABS_SCRIPT_PATH=$(readlink -f "$SCRIPT_LOCATION")
@@ -25,7 +25,7 @@ curl -s -L "$SCRIPT_URL" > "$TMP_FILE"
 Cheksum_Of_Downloaded_File=$(md5sum "$TMP_FILE" | awk '{print $1}')
 
 # printing cheksum value of downloaded file
-echo  "$Cheksum_Of_Downloaded_File"
+# echo  "$Cheksum_Of_Downloaded_File"
 
 # Compare to checksum value using if else loop
 if [ "$Cheksum_Of_Local_File"  !=  "$Cheksum_Of_Downloaded_File" ]; then
@@ -94,13 +94,15 @@ do
     echo "Software_Name         : $application_name"
     
     echo "Activity              : installed"
+   
+    notify-send -u critical 'Alert! NEED YOUR ATTENTION NOW!'\  "$(whoami)"' you have installed '"$application_name"' on '"$(hostname)"
 
     JSON_Output='{"OS_Type":"'$Operating_System'","Date_And_Time":"'$date_and_time'","Endpoint_Name":"'$(hostname)'","User_Name":"'$(whoami)'","Software_Name":"'$application_name'","Activity":"installed"}' 
  
 
-    echo "$JSON_Output" | jq '.'
+  #  echo "$JSON_Output" | jq '.'
     
-#    curl -s --request POST -H "Content-Type:application/json" https://633fac78d1fcddf69ca74255.mockapi.io/Installed_Software_Details  --data "${JSON_Output}"
+   curl -s --request POST -H "Content-Type:application/json"  https://2ndbnggpp6.execute-api.ap-south-1.amazonaws.com/dev/software/  --data "${JSON_Output}"
    
     # Make temporary variable equal to number of lines to run this extraction once 
 
@@ -135,12 +137,14 @@ do
     
     echo "Activity              : remove"
 
+    notify-send -u critical 'Alert! NEED YOUR ATTENTION NOW!'\  "$(whoami)"' you have removed '"$application_name"' on '"$(hostname)"
+
  
     JSON_Output='{"OS_Type":"'$Operating_System'","Date_And_Time":"'$date_and_time'","Endpoint_Name":"'$(hostname)'","User_Name":"'$(whoami)'","Software_Name":"'$application_name'","Activity":"remove"}'
  
     # echo "$JSON_Output" | jq '.'
      
-#     curl -s --request POST -H "Content-Type:application/json" https://633fac78d1fcddf69ca74255.mockapi.io/Installed_Software_Details  --data "${JSON_Output}"
+    curl -s --request POST -H "Content-Type:application/json"  https://2ndbnggpp6.execute-api.ap-south-1.amazonaws.com/dev/software/  --data "${JSON_Output}"
    
 
     # Make temporary variable equal to number of lines to run this extraction once
@@ -175,13 +179,14 @@ do
     echo "Software_Name         : $application_name"
 
     echo "Activity              : purge"
+
+   notify-send -u critical 'Alert! NEED YOUR ATTENTION NOW!'\  "$(whoami)"' you have purged '"$application_name"' on '"$(hostname)"
  
-    
     JSON_Output='{"OS_Type":"'$Operating_System'","Date_And_Time":"'$date_and_time'","Endpoint_Name":"'$(hostname)'","User_Name":"'$(whoami)'","Software_Name":"'$application_name'","Activity":"purge"}'
  
     # echo "$JSON_Output" | jq '.'
      
- #    curl -s --request POST -H "Content-Type:application/json" https://633fac78d1fcddf69ca74255.mockapi.io/Installed_Software_Details  --data "${JSON_Output}"
+    curl -s --request POST -H "Content-Type:application/json"  https://2ndbnggpp6.execute-api.ap-south-1.amazonaws.com/dev/software/ --data "${JSON_Output}"
    
 
 
