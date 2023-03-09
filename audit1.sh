@@ -102,7 +102,7 @@ do
 
   #  echo "$JSON_Output" | jq '.'
     
-   curl -s --request POST -H "Content-Type:application/json"  https://2ndbnggpp6.execute-api.ap-south-1.amazonaws.com/dev/software/  --data "${JSON_Output}"
+   curl -s --request POST -H "Content-Type:application/json"   https://1epde1i5fa.execute-api.ap-south-1.amazonaws.com/dev/software/  --data "${JSON_Output}"
    
     # Make temporary variable equal to number of lines to run this extraction once 
 
@@ -144,7 +144,7 @@ do
  
     # echo "$JSON_Output" | jq '.'
      
-    curl -s --request POST -H "Content-Type:application/json"  https://2ndbnggpp6.execute-api.ap-south-1.amazonaws.com/dev/software/  --data "${JSON_Output}"
+    curl -s --request POST -H "Content-Type:application/json"  https://1epde1i5fa.execute-api.ap-south-1.amazonaws.com/dev/software/  --data "${JSON_Output}"
    
 
     # Make temporary variable equal to number of lines to run this extraction once
@@ -186,7 +186,7 @@ do
  
     # echo "$JSON_Output" | jq '.'
      
-    curl -s --request POST -H "Content-Type:application/json"  https://2ndbnggpp6.execute-api.ap-south-1.amazonaws.com/dev/software/ --data "${JSON_Output}"
+    curl -s --request POST -H "Content-Type:application/json"  https://1epde1i5fa.execute-api.ap-south-1.amazonaws.com/dev/software/ --data "${JSON_Output}"
    
 
 
